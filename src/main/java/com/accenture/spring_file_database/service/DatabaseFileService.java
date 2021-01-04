@@ -1,6 +1,7 @@
 package com.accenture.spring_file_database.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,10 @@ public class DatabaseFileService {
     public DatabaseFile getFile(String fileId) {
         return dbFileRepository.findById(fileId)
                 .orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
+    }
+
+    public List<DatabaseFile> listAll() {
+        return dbFileRepository.findAll();
     }
 
 }
