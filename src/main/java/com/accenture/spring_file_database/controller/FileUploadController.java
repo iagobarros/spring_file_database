@@ -10,6 +10,8 @@ import com.accenture.spring_file_database.dto.DatabaseFileDto;
 import com.accenture.spring_file_database.model.DatabaseFile;
 import com.accenture.spring_file_database.service.DatabaseFileService;
 
+import java.io.IOException;
+
 @RestController
 public class FileUploadController {
 
@@ -17,13 +19,15 @@ public class FileUploadController {
     private DatabaseFileService fileStorageService;
 
     @PostMapping("/uploadFile")
-    public DatabaseFileDto uploadFile(@RequestParam("file") MultipartFile file) {
+    public DatabaseFileDto uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         DatabaseFile fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName.getFileName())
                 .toUriString();
+
+        //String content = new String(file.getBytes());
 
         return new DatabaseFileDto(fileName.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());

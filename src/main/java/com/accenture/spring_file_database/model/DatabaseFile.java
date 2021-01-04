@@ -16,6 +16,7 @@ public class DatabaseFile {
     private String fileType;
     @Lob
     private byte[] data;
+    // TODO inserir data depois conforme foi pedido
 
     public DatabaseFile(){}
 

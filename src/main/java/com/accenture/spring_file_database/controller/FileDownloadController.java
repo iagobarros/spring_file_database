@@ -19,7 +19,7 @@ public class FileDownloadController {
     @Autowired
     private DatabaseFileService fileStorageService;
 
-    @GetMapping("/downloadFile/{fileName:.+}")
+    @GetMapping(value = "/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
 
         DatabaseFile databaseFile = fileStorageService.getFile(fileName);
